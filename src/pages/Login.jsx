@@ -1,8 +1,9 @@
 import React from 'react'
+import {Box} from '@mui/material'
 
 const Login = () => {
   return (
-    <Box>
+    <Box display='flex'>
       
     </Box>
   )

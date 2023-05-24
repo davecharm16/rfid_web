@@ -3,6 +3,7 @@ import './App.css';
 import Home from './pages/Home'
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { myTheme } from './theme/colorTheme';
+import Login from './pages/Login';
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
       <div className="app">
         <Routes>
           <Route path='/' element = {<Home/>}/>
+          <Route path='/admin' element = {<Login/>}/>
         </Routes>
       </div>
     </ThemeProvider>
