@@ -1,10 +1,37 @@
 import React from 'react'
-import {Box} from '@mui/material'
+import {Box, Card, CardHeader, Typography, useTheme, CardContent, Input, TextField, Button} from '@mui/material'
 
 const Login = () => {
+  const theme = useTheme();
+
   return (
-    <Box display='flex'>
-      
+    <Box display='flex' justifyContent='center' width='100vw' height='100vh' flexDirection='column' alignItems='center'>
+      <Typography variant='h1' mb='20px' color={theme.palette.primary.main}>
+        RFID SYSTEM
+      </Typography>
+      <Card variant='outlined' sx={{minWidth : '500px', width: '800px', padding : '10px'}}  >
+        <CardHeader title="ADMIN LOGIN" subheader = "Log in your admin account here!" 
+        sx ={{ 
+          textAlign : 'center', 
+          '& .MuiCardHeader-title' : {
+          fontSize : '2rem'
+          },
+          '& .MuiCardHeader-subheader' : {
+          fontSize : '1.5rem'
+          },
+          color : theme.palette.primary.main
+        }}/>
+        <CardContent sx = {{
+          display : 'flex',
+          flexDirection : 'column', 
+          paddingX : '50px',
+          justifyContent : 'space-around'
+        }}>
+          <TextField variant= 'outlined' name = 'email' type='email' label = 'Email' sx ={{mb: '10px'}}/>
+          <TextField variant= 'outlined' name = 'password' type='password' label = 'Password' sx ={{mb: '10px'}}/>
+          <Button variant="contained" sx = {{alignSelf : 'center'}}>Login</Button>
+        </CardContent>
+      </Card>
     </Box>
   )
 }
