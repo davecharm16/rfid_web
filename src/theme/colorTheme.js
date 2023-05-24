@@ -25,7 +25,7 @@ export const myTheme = () =>{
             fontSize : 12,
             h1  : {           
                  fontFamily: ['Montserrat', 'sans-serif'].join(','),
-                fontSize : 40,
+                fontSize : 60,
             },
             h2  : {
                 fontFamily: ['Montserrat', 'sans-serif'].join(','),
