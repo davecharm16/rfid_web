@@ -1,8 +1,32 @@
-import React from 'react'
-import {Box, Card, CardHeader, Typography, useTheme, CardContent, Input, TextField, Button} from '@mui/material'
+import React, { useEffect } from 'react'
+import {Box, Card, CardHeader, Typography, useTheme, CardContent, TextField, Button} from '@mui/material'
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { firebaseConfig } from '../utils/utils';
+import { initializeApp } from "firebase/app";
+
+
+const app = initializeApp(firebaseConfig);
 
 const Login = () => {
   const theme = useTheme();
+
+  const handleSubmit = (email, password) =>{
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+  }
+
+  useEffect(()=>{
+
+  },[])
 
   return (
     <Box display='flex' justifyContent='center' width='100vw' height='100vh' flexDirection='column' alignItems='center'>
@@ -29,7 +53,7 @@ const Login = () => {
         }}>
           <TextField variant= 'outlined' name = 'email' type='email' label = 'Email' sx ={{mb: '10px'}}/>
           <TextField variant= 'outlined' name = 'password' type='password' label = 'Password' sx ={{mb: '10px'}}/>
-          <Button variant="contained" sx = {{alignSelf : 'center'}}>Login</Button>
+          <Button variant="contained" sx = {{alignSelf : 'center'}} onClick={handleSubmit}>Login</Button>
         </CardContent>
       </Card>
     </Box>
