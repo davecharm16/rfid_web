@@ -1,31 +1,44 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {Box, Card, CardHeader, Typography, useTheme, CardContent, TextField, Button} from '@mui/material'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { firebaseConfig } from '../utils/utils';
 import { initializeApp } from "firebase/app";
+import { Link, useNavigate } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
 
 
-const app = initializeApp(firebaseConfig);
 
 const Login = () => {
+  const app = initializeApp(firebaseConfig);
   const theme = useTheme();
+  const {updateUser} = useContext(UserContext);
+  const navigate = useNavigate('/dashboard');
 
-  const handleSubmit = (email, password) =>{
-    const auth = getAuth();
+  const [email, setEmail] = useState('');
+  const [password , setPassword] = useState('');
+  
+  const handleSubmit = () =>{
+    const auth = getAuth(app);
+    console.log(email,password)
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // Signed in 
+        // Signed in
         const user = userCredential.user;
+        console.log(user);
+        updateUser(user);
+        navigate('/dashboard')
         // ...
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.log(errorCode)
+        console.log(errorMessage)
       });
   }
 
   useEffect(()=>{
-
+    
   },[])
 
   return (
@@ -51,8 +64,14 @@ const Login = () => {
           paddingX : '50px',
           justifyContent : 'space-around'
         }}>
-          <TextField variant= 'outlined' name = 'email' type='email' label = 'Email' sx ={{mb: '10px'}}/>
-          <TextField variant= 'outlined' name = 'password' type='password' label = 'Password' sx ={{mb: '10px'}}/>
+          <TextField variant= 'outlined' name = 'email' type='email' label = 'Email' sx ={{mb: '10px'}}
+            value={email}
+            onChange={(e)=>setEmail(e.target.value)}
+          />
+          <TextField variant= 'outlined' name = 'password' type='password' label = 'Password' sx ={{mb: '10px'}}
+            onChange={(e)=>setPassword(e.target.value)}
+            value={password}
+          />
           <Button variant="contained" sx = {{alignSelf : 'center'}} onClick={handleSubmit}>Login</Button>
         </CardContent>
       </Card>
