@@ -6,6 +6,7 @@ import { initializeApp } from "firebase/app";
 import { firebaseConfig } from '../utils/utils';
 import { getDatabase, ref, onValue} from "firebase/database";
 import moment from 'moment/moment';
+import { useNavigate } from 'react-router-dom';
 
 const Admin = () => {
 
@@ -14,6 +15,7 @@ const Admin = () => {
 
   const [data, setData]  = useState([]);
   const db = getDatabase(app);
+  const navigate = useNavigate();
 
   const columns = [
     { field: 'UID', headerName: 'CARD ID', width: 90 },
@@ -61,6 +63,10 @@ const Admin = () => {
       renderCell: (params)=>{
         return (
           <Button color='primary' variant='contained'
+          onClick={()=>{
+            console.log('hi')
+            navigate(`/load/${params.row.UID}`);
+          }}
           sx = {{
             paddingX : '20px'
           }}
@@ -110,6 +116,7 @@ const Admin = () => {
             }}
             pageSizeOptions={[5]}
             slots={{ toolbar: GridToolbar }}
+            rowSelection = {false}
           />
         </Box>
       </Box>

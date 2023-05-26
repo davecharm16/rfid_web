@@ -8,6 +8,7 @@ import Admin from './pages/Admin';
 import UserProvider from './context/UserContext';
 import PrivateRoute from './context/ValidateAdmin';
 import ValidateAdmin from './context/ValidateAdmin';
+import Load from './pages/Load';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
             <Route path='/' element = {<Home/>}/>
             <Route path='/admin' element = {<Login/>}/>
             <Route path='/dashboard' element = {<Admin/>}/>
+            <Route path='/load/:id' element = {<Load/>}/>
           </Routes>
         </div>
       </UserProvider>
