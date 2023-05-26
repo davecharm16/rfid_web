@@ -8,7 +8,7 @@ const Nav = () => {
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h2" component="div" sx={{ flexGrow: 1 }}>
-          RFID SYSTEM
+          RFID SYSTEM DASHBOARD
         </Typography>
         <Button color='warning' variant='contained'>Logout</Button>
       </Toolbar>
