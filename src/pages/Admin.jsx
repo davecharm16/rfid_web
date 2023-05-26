@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 import React, {useEffect, useState} from 'react'
 import Nav from '../components/Nav'
 import { DataGrid, GridToolbar  } from '@mui/x-data-grid';
@@ -55,7 +55,18 @@ const Admin = () => {
       },
     },
     {
-
+      field : 'load',
+      flex : 1,
+      headerName : 'Load ID',
+      renderCell: (params)=>{
+        return (
+          <Button color='primary' variant='contained'
+          sx = {{
+            paddingX : '20px'
+          }}
+          > Load Card </Button>
+        )
+      }
     },
   ];
 
