@@ -3,8 +3,9 @@ import { Box, Card, Typography, CardContent, useTheme, TextField, Button } from 
 import Nav from '../components/Nav'
 import { useParams } from 'react-router-dom'
 import { initializeApp } from 'firebase/app'
-import { getDatabase, ref, onValue, set } from 'firebase/database'
+import { getDatabase, ref, onValue, set, push } from 'firebase/database'
 import { firebaseConfig } from '../utils/utils'
+import moment from 'moment'
 
 const Load = () => {
     const { id } = useParams();
@@ -36,15 +37,52 @@ const Load = () => {
             
             set(valueRef, newBalance)
             .then(() => {
+                updateTopUpData();
                 console.log('Value updated successfully!');
-                setLoadVal(0);
-                alert('Load successful');
             })
             .catch((error) => {
                 alert(error);
                 console.error('Error updating value:', error);
             });
         }
+    }
+
+    const updateTopUpData = () =>{
+        const database = getDatabase();
+        const dataRef = ref(database, `users/${id}/topup`);
+        const topUpRef = ref(database, `topups/`);
+
+        const newTopUpRef = push(topUpRef);
+        const newDataRef = push(dataRef);
+
+        const newTopUpData = {
+            card_id : id,
+            date : moment().format(),
+            load_value : parseInt(loadVal)
+        }
+
+        const newData = {
+            date : moment().format(),
+            value : parseInt(loadVal)
+        }
+
+        set(newDataRef,newData)
+        .then(() => {
+            console.log('New data added successfully! Load Top up');
+        })
+        .catch((error) => {
+            console.error('Error adding new data:', error);
+        });
+
+        set(newTopUpRef,newTopUpData)
+        .then(() => {
+            console.log('New data added successfully!');
+            setLoadVal(0);
+            alert('Load successful');
+        })
+        .catch((error) => {
+            console.error('Error adding new data:', error);
+        });
     }
 
   return (
