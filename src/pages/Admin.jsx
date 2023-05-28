@@ -10,11 +10,8 @@ import { useNavigate } from 'react-router-dom';
 
 const Admin = () => {
 
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
 
   const [data, setData]  = useState([]);
-  const db = getDatabase(app);
   const navigate = useNavigate();
 
   const columns = [
@@ -40,7 +37,7 @@ const Admin = () => {
       headerName: 'Entry Date Time',
       width: 200,
       valueGetter: (params) =>
-        (params.row.entryDateTime != "") ? moment(params.row.entryDateTime).format("MMMM DD YYYY, h:mm:ss a") : '',
+        (params.row.entryDateTime !== "") ? moment(params.row.entryDateTime).format("MMMM DD YYYY, h:mm:ss a") : '',
     },
     {
       field: 'exitDateTime',
@@ -48,7 +45,7 @@ const Admin = () => {
       sortable: false,
       width: 200,
       valueGetter: (params) =>{
-        if(params.row.exitDateTime == ''){
+        if(params.row.exitDateTime === ''){
           return ""
         }
         else{
@@ -77,7 +74,9 @@ const Admin = () => {
   ];
 
   useEffect(() => {
-
+      // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
     const starCountRef = ref(db, 'users/');
     onValue(starCountRef, (snapshot) => {
       const d = snapshot.val();
