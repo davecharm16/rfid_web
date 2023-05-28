@@ -19,31 +19,35 @@ const Admin = () => {
     {
       field: 'balance',
       headerName: 'Load Balance',
-      width: 150,
+      flex: 1,
       valueGetter : (params) => `₱ ${parseFloat(params.row.balance).toFixed(2)}`
     },
     {
       field: 'name',
       headerName: 'Name',
-      width: 150,
+      flex:1,
     },
     {
       field: 'plateNumber',
       headerName: 'Plate Number',
-      width: 110,
+      flex:1,
+    },
+    {
+      field: 'entryStatus',
+      headerName: 'Entry Status',
+      flex:1,
     },
     {
       field: 'entryDateTime',
       headerName: 'Entry Date Time',
-      width: 200,
+      flex:1,
       valueGetter: (params) =>
         (params.row.entryDateTime !== "") ? moment(params.row.entryDateTime).format("MMMM DD YYYY, h:mm:ss a") : '',
     },
     {
       field: 'exitDateTime',
       headerName: 'Exit Date Time',
-      sortable: false,
-      width: 200,
+      flex: 1,
       valueGetter: (params) =>{
         if(params.row.exitDateTime === ''){
           return ""
