@@ -7,6 +7,8 @@ import { getDatabase, ref, onValue, set, push } from 'firebase/database'
 import { firebaseConfig } from '../utils/utils'
 import moment from 'moment'
 import { useNavigate } from 'react-router-dom'
+import { DataGrid } from '@mui/x-data-grid'
+
 
 const Load = () => {
     const { id } = useParams();
