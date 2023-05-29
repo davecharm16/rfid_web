@@ -6,12 +6,15 @@ import { initializeApp } from 'firebase/app'
 import { getDatabase, ref, onValue, set, push } from 'firebase/database'
 import { firebaseConfig } from '../utils/utils'
 import moment from 'moment'
+import { useNavigate } from 'react-router-dom'
 
 const Load = () => {
     const { id } = useParams();
     const theme = useTheme();
     const [loadVal, setLoadVal] = useState(0);
     const [data, setData] = useState(undefined);
+    const navigate = useNavigate();
+    
 
     useEffect(()=>{
         const app = initializeApp(firebaseConfig);
@@ -90,7 +93,14 @@ const Load = () => {
     <Box>
       <Nav/>
       <Box p='20px' width='100vw' display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
-        <Typography variant='h2' sx ={{
+      <Box width='900px'>
+        <Button variant='contained' color='primary'  alignSelf='start'
+            onClick={()=>{
+                navigate(-1);
+            }}
+        >Go Back</Button>
+      </Box>
+        <Typography variant='h1' sx ={{
           textAlign:'center',
           mb : '20px'
         }}> Card Details</Typography>
@@ -130,7 +140,7 @@ const Load = () => {
                         <Typography variant='h3' color={theme.palette.primary.main} fontWeight='bold'> {data.name} </Typography>
                     </Box>
                     <Box display='flex' sx = {{mb : '10px', alignItems : 'center', width : '330px'}}>
-                        <Button variant='contained' color='primary' flex= {1}
+                        <Button variant='contained' color='success' flex= {1}
                             onClick={handleLoad}
                         >Load Card</Button>
                         <TextField type='number' variant='outlined' label ='Load Value' name='load' sx={{ ml: '10px'}}
