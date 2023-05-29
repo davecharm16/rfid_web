@@ -1,5 +1,5 @@
 import React from 'react'
-import { useTheme, Typography, Box, TextField, Button} from '@mui/material'
+import { useTheme, Typography, Box, TextField, Button, Card, CardContent} from '@mui/material'
 
 const Home = () => {
   const theme = useTheme();
@@ -18,6 +18,22 @@ const Home = () => {
         <TextField type='text' name='card_name' variant='outlined' label='CARD NUMBER' sx = {{m: '20px', 
         }}/>
         <Button variant='contained' color='success'>Search</Button>
+      </Box>
+      <Box>
+        <Card sx = {{width : '300px'}}>
+          <CardContent sx= {{display:'flex', justifyContent:'center'}}>
+            <Typography variant='h6' color={theme.palette.primary.main} fontWeight='bold' mx='10px' sx = {{flex : 1}}>Card Number</Typography>
+            <Typography variant='h6' color={theme.palette.secondary.main}>04 2F EG 1C</Typography>
+          </CardContent>
+          <CardContent sx= {{display:'flex', justifyContent:'center'}}>
+            <Typography variant='h6' color={theme.palette.primary.main} fontWeight='bold' mx='10px' sx = {{flex : 1}}>Card Holder</Typography>
+            <Typography variant='h6' color={theme.palette.secondary.main}>Jane Doe</Typography>
+          </CardContent>
+          <CardContent sx= {{display:'flex', justifyContent:'center'}}>
+            <Typography variant='h6' color={theme.palette.primary.main} fontWeight='bold' mx='10px' sx = {{flex : 1}}>Card Balance</Typography>
+            <Typography variant='h6' color={theme.palette.secondary.main}>20.00</Typography>
+          </CardContent>
+        </Card>
       </Box>
     </Box>
   )
