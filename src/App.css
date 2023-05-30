@@ -4,6 +4,11 @@
        -moz-appearance:none;
             appearance:none;
 }
+
+/* https://manilastandard.net/wp-content/uploads/2022/05/maya.jpg */ 
+/* maya */
+
+.paymaya{background-image:url(https://manilastandard.net/wp-content/uploads/2022/05/maya.jpg);}
 .visa{background-image:url(http://i.imgur.com/lXzJ1eB.png);}
 .mastercard{background-image:url(http://i.imgur.com/SJbRQF7.png);}
 .gcash{background-image:url(https://1000logos.net/wp-content/uploads/2023/05/GCash-Logo.png);}

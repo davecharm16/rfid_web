@@ -3,6 +3,8 @@ import { useTheme, Typography, Box, TextField, Button, Card, CardContent} from '
 import { firebaseConfig } from '../utils/utils';
 import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, onValue } from 'firebase/database';
+import Gcash from '../components/Gcash';
+import PayMaya from '../components/PayMaya';
 
 
 const Home = () => {
@@ -46,9 +48,9 @@ const Home = () => {
         <Button variant='contained' color='success' onClick={handleCard}>Search</Button>
       </Box>
       <Box>
-      {
-        card &&
-        <>
+    {
+      card &&
+      <>
         <Card sx = {{width : '300px'}}>
           <CardContent sx= {{display:'flex', justifyContent:'center'}}>
             <Typography variant='h6' color={theme.palette.primary.main} fontWeight='bold' mx='10px' sx = {{flex : 1}}>Card Number</Typography>
@@ -73,6 +75,12 @@ const Home = () => {
                   <label className="drinkcard-cc gcash" htmlFor="gcash"></label>
                 </Box>
                 <Box mx='10px'>
+                  <input id="paymaya" type="radio" name="payment" value="paymaya" onChange={(e)=>{
+                    setPayment(e.target.value)
+                  }}/>
+                  <label className="drinkcard-cc paymaya" htmlFor="paymaya"></label>
+                </Box>
+                <Box mx='10px'>
                   <input id="visa" type="radio" name="payment" value="visa" onChange={(e)=>{
                     setPayment(e.target.value)
                   }}/>
@@ -85,14 +93,18 @@ const Home = () => {
                   <label className="drinkcard-cc mastercard" htmlFor="mastercard"></label>
                 </Box>
               </Box>
-              {payment}
+              { (payment === 'gcash') && <Gcash/>}
+              { (payment === 'paymaya') && <PayMaya/>}
+              { (payment === 'visa') && <Card/>}
+              { (payment === 'mastercard') && <Card/>}
         </Box>
-        </>
-      }
+      </>
+    }
 
-      {
-        (card === null && search === true) && <Typography variant='h2' color='#DF4554'>Card is Not Registered / Found</Typography> 
-      }
+    {
+      (card === null && search === true) && 
+      <Typography variant='h2' color='#DF4554'>Card is Not Registered / Found</Typography> 
+    }
         
       </Box>
     </Box>
