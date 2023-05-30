@@ -50,7 +50,7 @@ const Home = () => {
       <Box>
     {
       card &&
-      <>
+      <Box display='flex' flexDirection='column' alignItems='center'>
         <Card sx = {{width : '300px'}}>
           <CardContent sx= {{display:'flex', justifyContent:'center'}}>
             <Typography variant='h6' color={theme.palette.primary.main} fontWeight='bold' mx='10px' sx = {{flex : 1}}>Card Number</Typography>
@@ -98,7 +98,7 @@ const Home = () => {
               { (payment === 'visa') && <Card/>}
               { (payment === 'mastercard') && <Card/>}
         </Box>
-      </>
+      </Box>
     }
 
     {
