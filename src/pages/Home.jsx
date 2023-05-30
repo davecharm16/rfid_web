@@ -1,8 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTheme, Typography, Box, TextField, Button, Card, CardContent} from '@mui/material'
+import { firebaseConfig } from '../utils/utils';
+import { initializeApp } from 'firebase/app';
+import { getDatabase, ref, onValue } from 'firebase/database';
+
 
 const Home = () => {
   const theme = useTheme();
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  const [card, setCard] = useState(null);
+  const [cardId , setCardId] = useState('');
+
+  const handleCard = () => {
+    console.log(cardId);
+    const starCountRef = ref(db, `users/${cardId}`);
+    onValue(starCountRef, (snapshot) => {
+      const d = snapshot.val();
+      setCard(d);
+    });
+  }
 
   return (
     <Box display='flex' justifyContent= 'center' alignItems = 'center' minWidth='100vw' minHeight = '100vh' flexDirection='column'
@@ -15,11 +33,19 @@ const Home = () => {
       <Typography variant='h1' color={theme.palette.primary.main} fontWeight='bold'>RFID PARKING</Typography>
       <Typography variant='h2' color={theme.palette.secondary.main} fontWeight='bold' >Load your Card Here</Typography>
       <Box display='flex' justifyContent='center' alignItems='center'>
-        <TextField type='text' name='card_name' variant='outlined' label='CARD NUMBER' sx = {{m: '20px', 
-        }}/>
-        <Button variant='contained' color='success'>Search</Button>
+        <TextField type='text' name='card_name' variant='outlined' label='CARD NUMBER' 
+          sx = {{m: '20px', 
+          }}
+          onChange={(e)=>{
+            setCardId(e.target.value);
+          }}
+        />
+        <Button variant='contained' color='success' onClick={handleCard}>Search</Button>
       </Box>
       <Box>
+      {
+        card &&
+        <>
         <Card sx = {{width : '300px'}}>
           <CardContent sx= {{display:'flex', justifyContent:'center'}}>
             <Typography variant='h6' color={theme.palette.primary.main} fontWeight='bold' mx='10px' sx = {{flex : 1}}>Card Number</Typography>
@@ -34,6 +60,13 @@ const Home = () => {
             <Typography variant='h6' color={theme.palette.secondary.main}>20.00</Typography>
           </CardContent>
         </Card>
+        <Typography my='20px'>Select Payment Method</Typography>
+        <Box>
+          
+        </Box>
+        </>
+      }
+        
       </Box>
     </Box>
   )
