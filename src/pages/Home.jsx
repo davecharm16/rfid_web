@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useTheme, Typography, Box, TextField, Button, Card, CardContent} from '@mui/material'
+import { useTheme, Typography, Box, TextField, Button, Card, CardContent, CircularProgress} from '@mui/material'
 import { firebaseConfig } from '../utils/utils';
 import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, onValue } from 'firebase/database';
 import Gcash from '../components/Gcash';
 import PayMaya from '../components/PayMaya';
+import CardCC from '../components/Card';
 
 
 const Home = () => {
@@ -18,13 +19,20 @@ const Home = () => {
   const [search, setSearch] = useState(false);
 
   const handleCard = () => {
-    setSearch(true);
-    console.log(cardId);
-    const starCountRef = ref(db, `users/${cardId}`);
-    onValue(starCountRef, (snapshot) => {
-      const d = snapshot.val();
-      setCard(d);
-    });
+    setSearch(false);
+    if(cardId !== '') {
+      const starCountRef = ref(db, `users/${cardId}/`);
+      onValue(starCountRef, (snapshot) => {
+        const d = snapshot.val();
+        setSearch(true)
+        setCard(d);
+      });
+      setSearch(false);
+    }
+    else{
+      setCard(null);
+    }
+    setSearch(false);
   }
 
   return (
@@ -33,6 +41,7 @@ const Home = () => {
         // backgroundImage: "linear-gradient(to bottom, rgba(245, 245, 245, 0.3), rgba(245, 246, 252, 0.3)),url('./bg.jpg')",
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
+        padding : '30px'
       }}
     >
       <Typography variant='h1' color={theme.palette.primary.main} fontWeight='bold'>RFID PARKING</Typography>
@@ -81,12 +90,6 @@ const Home = () => {
                   <label className="drinkcard-cc paymaya" htmlFor="paymaya"></label>
                 </Box>
                 <Box mx='10px'>
-                  <input id="visa" type="radio" name="payment" value="visa" onChange={(e)=>{
-                    setPayment(e.target.value)
-                  }}/>
-                  <label className="drinkcard-cc visa" htmlFor="visa"></label>
-                </Box>
-                <Box mx='10px'>
                   <input id="mastercard" type="radio" name="payment" value="mastercard" onChange={(e)=>{
                     setPayment(e.target.value)
                   }} />
@@ -94,9 +97,8 @@ const Home = () => {
                 </Box>
               </Box>
               { (payment === 'gcash') && <Gcash cardId={cardId} balance={card.balance}/>}
-              { (payment === 'paymaya') && <PayMaya/>}
-              { (payment === 'visa') && <Card/>}
-              { (payment === 'mastercard') && <Card/>}
+              { (payment === 'paymaya') && <PayMaya cardId={cardId} balance={card.balance}/>}
+              { (payment === 'mastercard') && <CardCC cardId={cardId} balance={card.balance}/>}
         </Box>
       </Box>
     }
