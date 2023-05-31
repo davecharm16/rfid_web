@@ -36,7 +36,7 @@ const PayMaya = ({cardId, balance}) => {
       if(!errorOpen){
         console.log('Load Here')
         const newBalance = parseFloat(loadVal) + parseFloat(balance);
-        const database = getDatabase(app);
+        const database = getDatabase();
         const valueRef = ref(database, `users/${cardId}/balance`);
         
         set(valueRef, newBalance)
