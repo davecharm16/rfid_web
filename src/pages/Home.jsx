@@ -93,7 +93,7 @@ const Home = () => {
                   <label className="drinkcard-cc mastercard" htmlFor="mastercard"></label>
                 </Box>
               </Box>
-              { (payment === 'gcash') && <Gcash/>}
+              { (payment === 'gcash') && <Gcash cardId={cardId} balance={card.balance}/>}
               { (payment === 'paymaya') && <PayMaya/>}
               { (payment === 'visa') && <Card/>}
               { (payment === 'mastercard') && <Card/>}
