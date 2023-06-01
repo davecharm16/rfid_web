@@ -28,8 +28,7 @@ const PayMaya = ({cardId, balance}) => {
       setError('Invalid Mobile Number, Please Enter a Valid Mobile Number');
       setErrorOpen(true);
     }
-
-    if(loadVal === '' || loadVal === 0) {
+    else if(loadVal === '' || loadVal === 0) {
       setError('Please Enter A Valid Amount Greater than Zero!');
       setErrorOpen(true);
     }

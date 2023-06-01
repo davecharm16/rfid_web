@@ -31,8 +31,7 @@ const CardCC = ({cardId, balance}) => {
       setError('Please Complete the Required Fields!');
       setErrorOpen(true);
     }
-
-    if(loadVal === '' || loadVal === 0) {
+    else if(loadVal === '' || loadVal <= 0) {
       setError('Please Enter A Valid Amount Greater than Zero!');
       setErrorOpen(true);
     }
