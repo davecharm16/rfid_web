@@ -6,7 +6,9 @@ import { initializeApp } from "firebase/app";
 import { useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import Nav from '../components/Nav'
-import { getDatabase, set, ref, get, child } from 'firebase/database';
+import { getDatabase, set, ref, get, child, push } from 'firebase/database';
+import { uid } from 'uid';
+import moment from 'moment';
 
 
 const RegisterCard = () => {
@@ -29,6 +31,7 @@ const RegisterCard = () => {
       setErrorOpen(true);
     }
     else{
+      const uid_key = uid(16);
       const data = {
         UID : cardId,
         balance : parseFloat(balance).toFixed(2),
@@ -37,9 +40,19 @@ const RegisterCard = () => {
         exitDateTime : '',
         name : name,
         plateNumber : plate,
-        topup : {},
+        topup : {
+          [uid_key] : {
+            date : moment().format(),
+            value : parseInt(balance)
+          }
+        },
       }
       if(!errorOpen){
+        const newTopUpData = {
+          card_id : cardId,
+          date : moment().format(),
+          load_value : parseInt(balance)
+        }
 
         const dbRef = ref(getDatabase());
         get(child(dbRef, `users/${cardId}`)).then((snapshot) => {
@@ -52,13 +65,21 @@ const RegisterCard = () => {
             .then(()=>{
               alert('Successfully Registered A Card');
             });
+
+            const topUpRef = ref(db, `topups/`);
+            const newTopUpRef = push(topUpRef);
+            set(newTopUpRef,newTopUpData)
+            .then(() => {
+                console.log('New data added successfully!');
+            })
+            .catch((error) => {
+                console.error('Error adding new data:', error);
+            });
             // console.log("No data available");
           }
         }).catch((error) => {
           console.error(error);
         });
-
-
       }
     }
   }
