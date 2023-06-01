@@ -9,6 +9,7 @@ import moment from 'moment'
 import { useNavigate } from 'react-router-dom'
 import { DataGrid } from '@mui/x-data-grid'
 import { validateNumber } from '../utils/validator'
+import LoadHistory from '../components/LoadHistory'
 
 
 const Load = () => {
@@ -96,17 +97,20 @@ const Load = () => {
     <Box>
       <Nav/>
       <Box p='20px' width='100vw' display='flex' flexDirection='column' justifyContent='center' alignItems='center'>
-      <Box width='900px'>
-        <Button variant='contained' color='primary'  alignSelf='start'
-            onClick={()=>{
-                navigate(-1);
-            }}
-        >Go Back</Button>
-      </Box>
-        <Typography variant='h1' sx ={{
+        <Box width='900px'>
+            <Button variant='contained' color='primary'  alignSelf='start'
+                onClick={()=>{
+                    navigate(-1);
+                }}
+            >Go Back</Button>
+        </Box>
+        <Typography variant='h2' sx ={{
           textAlign:'center',
-          mb : '20px'
-        }}> Card Details</Typography>
+          mb : '20px',
+          fontWeight : 'bold'
+        }}> 
+            Card Details
+        </Typography>
         <Box>
             <Card variant='outlined' 
             sx={{
@@ -162,6 +166,7 @@ const Load = () => {
                 </CardContent>
             </Card>
         </Box>
+        <LoadHistory data={data.topup}/>
       </Box>
     </Box>
   )
