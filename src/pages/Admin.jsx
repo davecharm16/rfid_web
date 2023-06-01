@@ -15,7 +15,7 @@ const Admin = () => {
   const navigate = useNavigate();
 
   const columns = [
-    { field: 'UID', headerName: 'CARD ID', width: 90 },
+    { field: 'UID', headerName: 'CARD ID', flex:1 },
     {
       field: 'balance',
       headerName: 'Load Balance',
@@ -40,14 +40,14 @@ const Admin = () => {
     {
       field: 'entryDateTime',
       headerName: 'Entry Date Time',
-      flex:1,
+      flex:2,
       valueGetter: (params) =>
         (params.row.entryDateTime !== "") ? moment(params.row.entryDateTime).format("MMMM DD YYYY, h:mm:ss a") : '',
     },
     {
       field: 'exitDateTime',
       headerName: 'Exit Date Time',
-      flex: 1,
+      flex: 2,
       valueGetter: (params) =>{
         if(params.row.exitDateTime === ''){
           return ""

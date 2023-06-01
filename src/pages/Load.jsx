@@ -8,6 +8,7 @@ import { firebaseConfig } from '../utils/utils'
 import moment from 'moment'
 import { useNavigate } from 'react-router-dom'
 import { DataGrid } from '@mui/x-data-grid'
+import { validateNumber } from '../utils/validator'
 
 
 const Load = () => {
@@ -152,7 +153,8 @@ const Load = () => {
                                     setLoadVal(0);
                                 }
                                 else{
-                                    setLoadVal(e.target.value);
+                                    
+                                    setLoadVal(validateNumber(e.target.value));
                                 }
                             }}
                         />
