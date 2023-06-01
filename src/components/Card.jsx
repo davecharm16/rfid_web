@@ -9,6 +9,7 @@ import { firebaseConfig } from '../utils/utils';
 import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, onValue, set, push } from 'firebase/database'
 import moment from 'moment';
+import { validateNumber } from '../utils/validator';
 
 const CardCC = ({cardId, balance}) => {
   const app = initializeApp(firebaseConfig);
@@ -30,8 +31,7 @@ const CardCC = ({cardId, balance}) => {
       setError('Please Complete the Required Fields!');
       setErrorOpen(true);
     }
-
-    if(loadVal === '' || loadVal === 0) {
+    else if(loadVal === '' || loadVal <= 0) {
       setError('Please Enter A Valid Amount Greater than Zero!');
       setErrorOpen(true);
     }
@@ -168,7 +168,7 @@ const CardCC = ({cardId, balance}) => {
             <TextField label='Load Amount' sx={{my : '5px'}}
               type='number'
               onChange={(e)=>{
-                setLoadVal(e.target.value)
+                setLoadVal(validateNumber(e.target.value))
               }}
               value={loadVal}
             />

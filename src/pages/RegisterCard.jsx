@@ -6,10 +6,10 @@ import { initializeApp } from "firebase/app";
 import { useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import Nav from '../components/Nav'
-import { getDatabase, set, ref, get, child, push } from 'firebase/database';
+import { getDatabase, set, ref, get, child, push, onValue } from 'firebase/database';
 import { uid } from 'uid';
 import moment from 'moment';
-
+import { validateNumber } from '../utils/validator';
 
 const RegisterCard = () => {
   const app = initializeApp(firebaseConfig);
@@ -21,7 +21,8 @@ const RegisterCard = () => {
   const [plate, setPlate] = useState('');
   const [errorOpen, setErrorOpen] = useState(false);
   const [error, setError] = useState('Error');
-  
+
+
 
   
   const handleSubmit = () =>{
@@ -85,7 +86,12 @@ const RegisterCard = () => {
   }
 
   useEffect(()=>{
-    
+    const db = getDatabase();
+    const cardRef = ref(db, 'NewCard/UID');
+    onValue(cardRef, (snapshot) =>{
+      const data = snapshot.val();
+      setCardId(data);
+    })
   },[])
 
   return (
@@ -94,6 +100,9 @@ const RegisterCard = () => {
     <Box display='flex' width='100vw' flexDirection='column' alignItems='center' py='40px'>
       <Typography variant='h2' mb='20px' color={theme.palette.primary.main} fontWeight='bold'>
         Register Card
+      </Typography>
+      <Typography variant='h3' mb='20px' color={theme.palette.secondary.main}>
+        <Typography variant='span'>Card Number : </Typography>{cardId}
       </Typography>
       <Collapse in={errorOpen}>
       <Alert severity="error"
@@ -138,9 +147,10 @@ const RegisterCard = () => {
             <TextField variant= 'outlined' name = 'cardId' type='text' label = 'Card UID' sx ={{m: '10px'}}
               value={cardId}
               onChange={(e)=>setCardId(e.target.value)}
+              disabled = {true}
             />
             <TextField variant= 'outlined' name = 'balance' type='number' label = 'Initial Balance' sx ={{m: '10px'}}
-              onChange={(e)=>setBalance(e.target.value)}
+              onChange={(e)=>setBalance(validateNumber(e.target.value))}
               value={balance}
             />
           </Box>
@@ -150,7 +160,7 @@ const RegisterCard = () => {
               onChange={(e)=> setName(e.target.value)}
             />
             <TextField variant= 'outlined' name = 'plate' type='text' label = 'Plate Number' sx ={{m: '10px'}}
-              inputProps={{maxLength : 6}}
+              inputProps={{maxLength : 12}}
               onChange={(e)=>setPlate(e.target.value)}
               value={plate}
             />

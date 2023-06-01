@@ -7,6 +7,7 @@ import { firebaseConfig } from '../utils/utils';
 import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, onValue, set, push } from 'firebase/database'
 import moment from 'moment';
+import { validateNumber } from '../utils/validator';
 
 
 
@@ -27,8 +28,7 @@ const Gcash = ({cardId, balance}) => {
       setError('Invalid Mobile Number, Please Enter a Valid Mobile Number');
       setErrorOpen(true);
     }
-
-    if(loadVal === '' || loadVal === 0) {
+    else if(loadVal === '' || loadVal === 0) {
       setError('Please Enter A Valid Amount Greater than Zero!');
       setErrorOpen(true);
     }
@@ -134,14 +134,14 @@ const Gcash = ({cardId, balance}) => {
       </Box>
       <Box display='flex' alignItems='center'>
         <Typography variant='h5' mx='10px' color = 'secondary' fontWeight='bold'>Load</Typography>
-        <TextField label='Enter Amount' type='text' sx = {{
+        <TextField label='Enter Amount' type='number' sx = {{
           '& .MuiInputLabel-root'  : {
             fontWeight : 'bold',
             color : '#025464',
           }
         }}
         value={loadVal}
-        onChange={(e)=>{setLoadVal(e.target.value)}}
+        onChange={(e)=>{setLoadVal(validateNumber(e.target.value))}}
         />
       </Box>
       <Button variant='contained'  color='success' sx = {{mx: '10px'}} onClick = {handleLoad}>
