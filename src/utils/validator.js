@@ -3,7 +3,7 @@ export const validateNumber = (num) => {
     //     return 0
     // }
     if(num === ''){
-        return 
+        return ''
     }
     num = parseFloat(num);
         
