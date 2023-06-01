@@ -7,7 +7,7 @@ export const validateNumber = (num) => {
     }
     num = parseFloat(num);
         
-        console.log(error);
+    // console.log(error);
 
 
     if (num <= 0) {
