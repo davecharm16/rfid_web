@@ -65,7 +65,7 @@ const Admin = () => {
         return (
           <Button color='primary' variant='contained'
           onClick={()=>{
-            console.log('hi')
+            // console.log('hi')
             navigate(`/load/${params.row.UID}`);
           }}
           sx = {{

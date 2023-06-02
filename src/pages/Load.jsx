@@ -65,12 +65,14 @@ const Load = () => {
         const newTopUpData = {
             card_id : id,
             date : moment().format(),
-            load_value : parseInt(loadVal)
+            load_value : parseInt(loadVal),
+            'method' : 'Admin',
         }
 
         const newData = {
             date : moment().format(),
-            value : parseInt(loadVal)
+            value : parseInt(loadVal),
+            'method' : 'Admin'
         }
 
         set(newDataRef,newData)

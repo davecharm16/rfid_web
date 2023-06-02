@@ -44,7 +44,8 @@ const RegisterCard = () => {
         topup : {
           [uid_key] : {
             date : moment().format(),
-            value : parseInt(balance)
+            value : parseInt(balance),
+            method : 'Admin',
           }
         },
       }
@@ -52,7 +53,8 @@ const RegisterCard = () => {
         const newTopUpData = {
           card_id : cardId,
           date : moment().format(),
-          load_value : parseInt(balance)
+          load_value : parseInt(balance),
+          method : 'Admin',
         }
 
         const dbRef = ref(getDatabase());
