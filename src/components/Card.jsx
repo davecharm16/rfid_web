@@ -67,12 +67,14 @@ const CardCC = ({cardId, balance}) => {
     const newTopUpData = {
         card_id : cardId,
         date : moment().format(),
-        load_value : parseInt(loadVal)
+        load_value : parseInt(loadVal),
+        method : 'Card',
     }
 
     const newData = {
         date : moment().format(),
-        value : parseInt(loadVal)
+        value : parseInt(loadVal),
+        method : 'Card',
     }
 
     set(newDataRef,newData)

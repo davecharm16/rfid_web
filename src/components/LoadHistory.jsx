@@ -32,6 +32,11 @@ const LoadHistory = ({data}) => {
       flex : 1,
       valueGetter : (params) => `₱ ${parseFloat(params.row.value).toFixed(2)}`
     },
+    {
+      field : 'method',
+      headerName : 'Payment Method',
+      flex : 1,
+    },
   ]
   return (
     data  && 
@@ -41,7 +46,7 @@ const LoadHistory = ({data}) => {
         <DataGrid rows={transactions} columns={col} getRowId={getRowId}
         initialState={{
             pagination: {
-              paginationModel: { pageSize: 3},
+              paginationModel: { pageSize: 5},
             },
           }}
         />
