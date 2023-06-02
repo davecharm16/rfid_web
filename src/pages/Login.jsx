@@ -46,7 +46,7 @@ const Login = () => {
   return (
     <Box display='flex' justifyContent='center' width='100vw' height='100vh' flexDirection='column' alignItems='center'>
       <Typography variant='h1' mb='20px' color={theme.palette.primary.main}>
-        RFID SYSTEM
+        RFID PARKING SYSTEM
       </Typography>
       {
         (error) &&
