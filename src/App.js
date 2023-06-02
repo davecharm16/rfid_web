@@ -10,6 +10,7 @@ import PrivateRoute from './context/ValidateAdmin';
 import ValidateAdmin from './context/ValidateAdmin';
 import Load from './pages/Load';
 import RegisterCard from './pages/RegisterCard';
+import Transactions from './pages/Transactions';
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
             <Route path='/dashboard' element = {<Admin/>}/>
             <Route path='/load/:id' element = {<Load/>}/>
             <Route path='/register' element = {<RegisterCard/>}/>
+            <Route path='/transactions' element = {<Transactions/>}/>
           </Routes>
         </div>
       </UserProvider>
