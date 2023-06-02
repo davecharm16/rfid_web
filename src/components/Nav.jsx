@@ -13,6 +13,11 @@ const Nav = () => {
           RFID SYSTEM DASHBOARD
         </Typography>
         <Button  sx={{mr : '20px'}} color='info' variant='contained' onClick={()=>{
+          navigate('/transactions');
+        }}>
+          All Transactions
+        </Button>
+        <Button  sx={{mr : '20px'}} color='info' variant='contained' onClick={()=>{
           navigate('/dashboard');
         }}>
           Dashboard
