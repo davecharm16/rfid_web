@@ -23,10 +23,10 @@ function App() {
           <Routes>
             <Route path='/' element = {<Home/>}/>
             <Route path='/admin' element = {<Login/>}/>
-            <Route path='/dashboard' element = {<Admin/>}/>
-            <Route path='/load/:id' element = {<Load/>}/>
-            <Route path='/register' element = {<RegisterCard/>}/>
-            <Route path='/transactions' element = {<Transactions/>}/>
+            <Route path='/dashboard' element = { <ValidateAdmin><Admin/></ValidateAdmin>}/>
+            <Route path='/load/:id' element = {<ValidateAdmin><Load/> </ValidateAdmin>}/>
+            <Route path='/register' element = {<ValidateAdmin><RegisterCard/></ValidateAdmin>}/>
+            <Route path='/transactions' element = {<ValidateAdmin><Transactions/></ValidateAdmin>}/>
           </Routes>
         </div>
       </UserProvider>

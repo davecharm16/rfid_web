@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import {Box, Card, CardHeader, Typography, useTheme, CardContent, TextField, Button} from '@mui/material'
+import {Box, Card, CardHeader, Typography, useTheme, CardContent, TextField, Button, Alert} from '@mui/material'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { firebaseConfig } from '../utils/utils';
 import { initializeApp } from "firebase/app";
@@ -16,6 +16,7 @@ const Login = () => {
 
   const [email, setEmail] = useState('');
   const [password , setPassword] = useState('');
+  const [error, setError] = useState(null);
   
   const handleSubmit = () =>{
     const auth = getAuth(app);
@@ -34,6 +35,7 @@ const Login = () => {
         const errorMessage = error.message;
         console.log(errorCode)
         console.log(errorMessage)
+        setError('Error Logging In : ' + errorMessage);
       });
   }
 
@@ -46,6 +48,10 @@ const Login = () => {
       <Typography variant='h1' mb='20px' color={theme.palette.primary.main}>
         RFID SYSTEM
       </Typography>
+      {
+        (error) &&
+        <Alert severity='error'>{error}</Alert>
+      }
       <Card variant='outlined' sx={{minWidth : '500px', width: '800px', padding : '10px'}}  >
         <CardHeader title="ADMIN LOGIN" subheader = "Log in your admin account here!" 
         sx ={{ 
