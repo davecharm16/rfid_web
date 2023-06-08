@@ -7,6 +7,7 @@ import { firebaseConfig } from '../utils/utils';
 import { getDatabase, ref, onValue} from "firebase/database";
 import moment from 'moment/moment';
 import { useNavigate } from 'react-router-dom';
+import { formatDate } from '../utils/formatDate';
 
 const Admin = () => {
 
@@ -42,7 +43,7 @@ const Admin = () => {
       headerName: 'Entry Date Time',
       flex:2,
       valueGetter: (params) =>
-        (params.row.entryDateTime !== "") ? moment(params.row.entryDateTime).format("MMMM DD YYYY, h:mm:ss a") : '',
+        (params.row.entryDateTime !== "") ? moment(formatDate(params.row.entryDateTime)).format("MMMM DD YYYY, h:mm:ss a") : '',
     },
     {
       field: 'exitDateTime',
@@ -53,7 +54,7 @@ const Admin = () => {
           return ""
         }
         else{
-          return moment(params.row.exitDateTime).format("MMMM DD YYYY, h:mm:ss a")
+          return moment(formatDate(params.row.exitDateTime)).format("MMMM DD YYYY, h:mm:ss a")
         }
       },
     },
