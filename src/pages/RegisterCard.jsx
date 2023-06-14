@@ -35,9 +35,9 @@ const RegisterCard = () => {
       const uid_key = uid(16);
       const data = {
         UID : cardId,
-        balance : parseFloat(balance).toFixed(2),
+        balance : parseFloat(balance),
         entryDateTime : '',
-        entryStatus : '',
+        entryStatus : false,
         exitDateTime : '',
         name : name,
         plateNumber : plate,
