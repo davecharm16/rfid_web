@@ -79,7 +79,7 @@ const Display = () => {
                     <Typography variant='h1' fontWeight='bold' color='#4BB543' fontSize='7em'>{'\u00A0'}{data.UID}</Typography>
                 </Box>
                 <Box display='flex'>
-                    <Typography variant='h1' fontWeight='bold' color='secondary' fontSize='7em'>New Balance :</Typography>
+                    <Typography variant='h1' fontWeight='bold' color='secondary' fontSize='7em'>New Balance:</Typography>
                     <Typography variant='h1' fontWeight='bold' color='#4BB543' fontSize='7em'> {'\u00A0'}{` ₱ ${parseFloat(data.newBal).toFixed(2)}`} </Typography>
                 </Box>
               </>
