@@ -11,6 +11,7 @@ import ValidateAdmin from './context/ValidateAdmin';
 import Load from './pages/Load';
 import RegisterCard from './pages/RegisterCard';
 import Transactions from './pages/Transactions';
+import Display from './pages/Display';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <div className="app">
           <Routes>
             <Route path='/' element = {<Home/>}/>
+            <Route path='/display' element = {<Display/>}/>
             <Route path='/admin' element = {<Login/>}/>
             <Route path='/dashboard' element = { <ValidateAdmin><Admin/></ValidateAdmin>}/>
             <Route path='/load/:id' element = {<ValidateAdmin><Load/> </ValidateAdmin>}/>
