@@ -7,9 +7,7 @@ import { getDatabase, onValue, ref } from 'firebase/database';
 const Display = () => {
   const [data, setData] = useState(null);
   const [dataUID , setDataUID] = useState('')
-  const [isNew, setIsNew] = useState(false);
   const [empty, setEmpty] = useState(false);
-  const [lastData, setLastData] = useState(null);
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app);
 
@@ -70,16 +68,21 @@ const Display = () => {
             (!empty) &&
             <>
             <Box display='flex' mb='3rem'>
-                <Typography variant='h1' fontWeight='bold' color='primary' fontSize='8em' >{data.messagePrompt}</Typography>
+                <Typography variant='h1' fontWeight='bold' color={(data.checkedAllParams) ? 'primary' : '#c62828'} fontSize='8em' >{data.messagePrompt}</Typography>
             </Box>
-            <Box display='flex'>
-                <Typography variant='h1' fontWeight='bold' color='secondary' fontSize='7em'>Card ID:</Typography>
-                <Typography variant='h1' fontWeight='bold' color='#4BB543' fontSize='7em'>{'\u00A0'}{data.UID}</Typography>
-            </Box>
-            <Box display='flex'>
-                <Typography variant='h1' fontWeight='bold' color='secondary' fontSize='7em'>New Balance :</Typography>
-                <Typography variant='h1' fontWeight='bold' color='#4BB543' fontSize='7em'> {'\u00A0'}{` ₱ ${parseFloat(data.newBal).toFixed(2)}`} </Typography>
-            </Box>
+              {
+              (data.checkedAllParams) &&
+              <>
+                <Box display='flex'>
+                    <Typography variant='h1' fontWeight='bold' color='secondary' fontSize='7em'>Card ID:</Typography>
+                    <Typography variant='h1' fontWeight='bold' color='#4BB543' fontSize='7em'>{'\u00A0'}{data.UID}</Typography>
+                </Box>
+                <Box display='flex'>
+                    <Typography variant='h1' fontWeight='bold' color='secondary' fontSize='7em'>New Balance :</Typography>
+                    <Typography variant='h1' fontWeight='bold' color='#4BB543' fontSize='7em'> {'\u00A0'}{` ₱ ${parseFloat(data.newBal).toFixed(2)}`} </Typography>
+                </Box>
+              </>
+              }
             </>
           }
         </>
