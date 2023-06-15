@@ -68,7 +68,8 @@ const Display = () => {
             (!empty) &&
             <>
             <Box display='flex' mb='3rem'>
-                <Typography variant='h1' fontWeight='bold' color={(data.checkedAllParams) ? 'primary' : '#c62828'} fontSize='8em' >{data.messagePrompt}</Typography>
+                <Typography variant='h1' fontWeight='bold' color={(data.checkedAllParams) ? 'primary' : '#c62828'} fontSize='8em' >{data.messagePrompt}
+                </Typography>
             </Box>
               {
               (data.checkedAllParams) &&
