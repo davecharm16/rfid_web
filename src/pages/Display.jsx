@@ -62,7 +62,7 @@ const Display = () => {
           <Typography variant='h2' color='primary' fontWeight='bold' top='0' position='absolute'>RFID PARKING SYSTEM</Typography>
           {
           (empty) &&
-            <Typography variant='h1' color='secondary' textAlign='center' fontSize='8vw' fontWeight='bold'> Please Tap a Card</Typography>
+            <Typography variant='h1' color='secondary' textAlign='center' fontSize='8vw' fontWeight='bold'> Please Tap Your Card</Typography>
           }
           {
             (!empty) &&
