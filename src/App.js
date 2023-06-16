@@ -23,7 +23,7 @@ function App() {
         <div className="app">
           <Routes>
             <Route path='/' element = {<Home/>}/>
-            <Route path='/display' element = {<Display/>}/>
+            <Route path='/display/:status' element = {<Display/>}/>
             <Route path='/admin' element = {<Login/>}/>
             <Route path='/dashboard' element = { <ValidateAdmin><Admin/></ValidateAdmin>}/>
             <Route path='/load/:id' element = {<ValidateAdmin><Load/> </ValidateAdmin>}/>
