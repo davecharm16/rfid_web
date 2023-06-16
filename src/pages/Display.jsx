@@ -3,22 +3,31 @@ import { initializeApp } from 'firebase/app';
 import React, { useEffect, useState } from 'react'
 import { firebaseConfig } from '../utils/utils';
 import { getDatabase, onValue, ref } from 'firebase/database';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Display = () => {
   const [data, setData] = useState(null);
   const [dataUID , setDataUID] = useState('')
   const [empty, setEmpty] = useState(false);
+  const [reference, setReference] = useState(undefined);
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app);
+  const params = useParams();
+  const navigate = useNavigate();
+  const {status} = params;
 
-  // const displayData = new Promise((resolve, reject)=>{
-  //   setTimeout(() => {
-  //     resolve('yow');
-  //   }, 7000)
-  // })
 
   useEffect(() => {
-    const dbRef = ref(db, '/recentTransaction');
+
+    let reference = undefined;
+    if(status === 'entry' || status === 'exit'){
+      (status === 'entry') ? reference  = '/recentTransaction': reference  = '/exitTransaction'
+    }
+    else{
+      navigate('/')
+    }
+
+    const dbRef = ref(db, reference);
     onValue(dbRef, (snapshot) => {
       const dataFromFirebase = snapshot.val();
       console.log(dataFromFirebase.UID);
@@ -37,7 +46,7 @@ const Display = () => {
         setEmpty(true); // setEmpty to true after 7 seconds
       });
     });
-  }, []);
+  }, [reference]);
   
 
   useEffect(()=>{
@@ -49,9 +58,6 @@ const Display = () => {
     }
   },[data])
 
-  useEffect(()=>{
-    console.log(empty);
-  },[empty])
   
   return (
     
